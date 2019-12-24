@@ -1,4 +1,4 @@
-package cn.edu.nju;
+package cn.edu.nju.distributedLock;
 
 /**
  * Created by thpffcj on 2019/12/23.
@@ -9,7 +9,7 @@ public class LockTest {
         for (int i = 0; i < 10; i++) {
             new Thread() {
                 public void run() {
-                    DistributedLock distributedLock = new DistributedLock("localhost:2181", 3000, "/lock");
+                    DistributedLock distributedLock = new DistributedLock("thpffcj1:2181", 3000, "/lock");
                     try {
                         distributedLock.lock();
                         System.out.println(Thread.currentThread().getName() + "开始执行");
