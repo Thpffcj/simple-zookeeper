@@ -6,6 +6,7 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.ZooDefs.Ids;
+import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
 import java.util.List;
@@ -91,10 +92,10 @@ public class ZKNodeOperator implements Watcher {
          */
 //        zkServer.createZKNode("/test-delete-node", "123".getBytes(), Ids.OPEN_ACL_UNSAFE);
 //		zkServer.getZookeeper().delete("/test-delete-node", 0);
-
+//
 //        String ctx = "{'delete':'success'}";
 //        zkServer.getZookeeper().delete("/testnode", 1, new DeleteCallBack(), ctx);
-//        Thread.sleep(2000);
+        Thread.sleep(2000);
     }
 
     public ZooKeeper getZookeeper() {
