@@ -74,7 +74,7 @@ public class ZKNodeOperator implements Watcher {
         ZKNodeOperator zkServer = new ZKNodeOperator(zkServerPath);
 
         // 创建zk节点
-		zkServer.createZKNode("/testnode", "testnode".getBytes(), Ids.OPEN_ACL_UNSAFE);
+		zkServer.createZKNode("/thpffcj/test1", "test1".getBytes(), Ids.OPEN_ACL_UNSAFE);
 
         /**
          * 参数：
@@ -82,7 +82,7 @@ public class ZKNodeOperator implements Watcher {
          * data：数据
          * version：数据状态
          */
-//		Stat status  = zkServer.getZookeeper().setData("/testnode", "xyz".getBytes(), 0);
+//		Stat status  = zkServer.getZookeeper().setData("/thpffcj/test", "test1".getBytes(), 0);
 //		System.out.println(status.getVersion());
 
         /**
