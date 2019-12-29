@@ -1,4 +1,4 @@
-package cn.edu.nju.curator.utils;
+package cn.edu.nju.configurationManagement;
 
 /**
  * Created by thpffcj on 2019/12/27.

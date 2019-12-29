@@ -1,4 +1,4 @@
-package cn.edu.nju.curator.utils;
+package cn.edu.nju.configurationManagement;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
