@@ -1,4 +1,4 @@
-package cn.edu.nju.distributedLock;
+package cn.edu.nju.distributedLock.zk;
 
 /**
  * Created by thpffcj on 2019/12/23.

@@ -1,4 +1,4 @@
-package cn.edu.nju.distributedLock;
+package cn.edu.nju.distributedLock.zk;
 
 import org.apache.zookeeper.*;
 

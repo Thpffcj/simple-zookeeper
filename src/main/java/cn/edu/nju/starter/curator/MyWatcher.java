@@ -1,4 +1,4 @@
-package cn.edu.nju.curator;
+package cn.edu.nju.starter.curator;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
