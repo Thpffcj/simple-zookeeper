@@ -1,4 +1,4 @@
-package cn.edu.nju.configurationManagement;
+package cn.edu.nju.configurationManagement.curator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.RetryPolicy;
@@ -15,12 +15,12 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Created by thpffcj on 2019/12/29.
  */
-public class Client2 {
+public class Client3 {
 
     public CuratorFramework client = null;
     public static final String zkServerPath = "thpffcj1:2181";
 
-    public Client2() {
+    public Client3() {
         RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
         client = CuratorFrameworkFactory.builder()
                 .connectString(zkServerPath)
@@ -41,8 +41,8 @@ public class Client2 {
     public static CountDownLatch countDown = new CountDownLatch(1);
 
     public static void main(String[] args) throws Exception {
-        Client2 cto = new Client2();
-        System.out.println("client2 启动成功...");
+        Client3 cto = new Client3();
+        System.out.println("client3 启动成功...");
 
         final PathChildrenCache childrenCache = new PathChildrenCache(cto.client, CONFIG_NODE_PATH, true);
         childrenCache.start(StartMode.BUILD_INITIAL_CACHE);

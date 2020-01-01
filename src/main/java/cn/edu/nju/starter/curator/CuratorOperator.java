@@ -3,10 +3,13 @@ package cn.edu.nju.starter.curator;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.api.CuratorWatcher;
 import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache.StartMode;
 import org.apache.curator.retry.*;
 import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 
 import java.util.List;
@@ -18,6 +21,20 @@ public class CuratorOperator {
 
     public CuratorFramework client = null;
     public static final String zkServerPath = "thpffcj1:2181";
+
+    static class MyCuratorWatcher implements CuratorWatcher {
+        @Override
+        public void process(WatchedEvent event) throws Exception {
+            System.out.println("触发watcher，节点路径为：" + event.getPath());
+        }
+    }
+
+    static class MyWatcher implements Watcher {
+        @Override
+        public void process(WatchedEvent event) {
+            System.out.println("触发watcher，节点路径为：" + event.getPath());
+        }
+    }
 
     /**
      * 实例化zk客户端

@@ -1,26 +1,26 @@
-package cn.edu.nju.configurationManagement;
+package cn.edu.nju.configurationManagement.curator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache.StartMode;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
-import org.apache.curator.framework.recipes.cache.PathChildrenCache.StartMode;
 import org.apache.curator.retry.RetryNTimes;
 
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Created by thpffcj on 2019/12/29.
+ * Created by thpffcj on 2019/12/28.
  */
-public class Client3 {
+public class Client1 {
 
     public CuratorFramework client = null;
     public static final String zkServerPath = "thpffcj1:2181";
 
-    public Client3() {
+    public Client1() {
         RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
         client = CuratorFrameworkFactory.builder()
                 .connectString(zkServerPath)
@@ -41,14 +41,27 @@ public class Client3 {
     public static CountDownLatch countDown = new CountDownLatch(1);
 
     public static void main(String[] args) throws Exception {
-        Client3 cto = new Client3();
-        System.out.println("client3 启动成功...");
 
-        final PathChildrenCache childrenCache = new PathChildrenCache(cto.client, CONFIG_NODE_PATH, true);
+        Client1 cto = new Client1();
+        System.out.println("client1 启动成功...");
+
+        // 子节点添加watcher
+        // PathChildrenCache：监听数据节点的增删改，会触发事件
+        final PathChildrenCache childrenCache = new PathChildrenCache(
+                cto.client, CONFIG_NODE_PATH, true);
+
+        /*
+         * StartMode：初始化方式
+         * POST_INITIALIZED_EVENT：异步初始化。初始化后会触发事件
+         * NORMAL：异步初始化
+         * BUILD_INITIAL_CACHE：同步初始化
+         */
         childrenCache.start(StartMode.BUILD_INITIAL_CACHE);
 
         // 添加监听事件
         childrenCache.getListenable().addListener(new PathChildrenCacheListener() {
+
+            @Override
             public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
                 // 监听节点变化
                 if (event.getType().equals(PathChildrenCacheEvent.Type.CHILD_UPDATED)) {
@@ -71,6 +84,7 @@ public class Client3 {
                             String type = redisConfig.getType();
                             String url = redisConfig.getUrl();
                             String remark = redisConfig.getRemark();
+
                             // 判断事件
                             if (type.equals("add")) {
                                 System.out.println("监听到新增的配置，准备下载...");

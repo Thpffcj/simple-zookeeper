@@ -8,6 +8,8 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 
 /**
  * Created by thpffcj on 2019/12/30.
+ *
+ * 所有存活的客户端不间断的轮流做Leader
  */
 public class MasterElection {
 
