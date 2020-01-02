@@ -9,6 +9,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 /**
  * Created by thpffcj on 2019/12/30.
  *
+ * 从Paxos到Zookeeper：分布式一致性原理与实践示例
  * 所有存活的客户端不间断的轮流做Leader
  */
 public class MasterElection {

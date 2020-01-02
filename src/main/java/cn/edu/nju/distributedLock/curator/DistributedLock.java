@@ -11,6 +11,8 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by thpffcj on 2019/12/30.
+ *
+ * 从Paxos到Zookeeper：分布式一致性原理与实践示例
  */
 public class DistributedLock {
 
