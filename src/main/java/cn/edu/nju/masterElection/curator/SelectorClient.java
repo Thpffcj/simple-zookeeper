@@ -1,4 +1,4 @@
-package cn.edu.nju.masterElection.curaotr;
+package cn.edu.nju.masterElection.curator;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.leader.LeaderSelector;

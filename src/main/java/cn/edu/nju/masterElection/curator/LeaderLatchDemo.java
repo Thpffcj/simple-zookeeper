@@ -1,4 +1,4 @@
-package cn.edu.nju.masterElection.curaotr;
+package cn.edu.nju.masterElection.curator;
 
 import com.google.common.collect.Lists;
 import org.apache.curator.framework.CuratorFramework;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * 一旦选举出Leader，除非有客户端挂掉重新触发选举，否则不会交出领导权
  */
-public class LeaderLatchExample {
+public class LeaderLatchDemo {
 
     private static final int CLIENT_QTY = 10;
     private static final String PATH = "/examples/leader";

@@ -1,4 +1,4 @@
-package cn.edu.nju.masterElection.curaotr;
+package cn.edu.nju.masterElection.curator;
 
 import com.google.common.collect.Lists;
 import org.apache.curator.framework.CuratorFramework;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * 所有存活的客户端不间断的轮流做Leader
  */
-public class LeaderSelectorExample {
+public class LeaderSelectorDemo {
 
     private static final int CLIENT_QTY = 10;
     private static final String PATH = "/examples/leader";

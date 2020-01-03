@@ -1,4 +1,4 @@
-package cn.edu.nju.masterElection.curaotr;
+package cn.edu.nju.starter.book;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
