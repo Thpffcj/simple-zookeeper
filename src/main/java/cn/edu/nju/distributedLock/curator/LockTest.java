@@ -43,8 +43,8 @@ public class LockTest {
                          * 你不应该在多个线程中用同一个InterProcessMutex， 你可以在每个线程中都生成一个新的InterProcessMutex实例，
                          * 它们的path都一样，这样它们可以共享同一个锁
                          */
-                        final InterProcessMutexDemo example = new InterProcessMutexDemo(
-                                client, PATH, resource, "Client：" + index);
+//                        final InterProcessMutexDemo example = new InterProcessMutexDemo(
+//                                client, PATH, resource, "Client：" + index);
 
                         /**
                          * 运行后发现，有且只有一个client成功获取第一个锁(第一个acquire()方法返回true)，然后它自己阻塞在第
@@ -52,7 +52,10 @@ public class LockTest {
                          * 这样也就验证了InterProcessSemaphoreMutex实现的锁是不可重入的。
                          */
 //                        final InterProcessSemaphoreMutexDemo example = new InterProcessSemaphoreMutexDemo(
-//                                client, PATH, resource, "Client " + index);
+//                                client, PATH, resource, "Client：" + index);
+
+                        final InterProcessReadWriteLockDemo example = new InterProcessReadWriteLockDemo(
+                                client, PATH, resource, "Client：" + index);
 
                         for (int j = 0; j < REPETITIONS; j++) {
                             example.doWork(10, TimeUnit.SECONDS);
