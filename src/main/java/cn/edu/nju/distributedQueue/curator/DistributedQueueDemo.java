@@ -9,9 +9,10 @@ import org.apache.curator.framework.recipes.queue.QueueSerializer;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.test.TestingServer;
+import org.apache.curator.utils.CloseableUtils;
 
 /**
- * Created by thpffcj on 2020/1/4.
+ * Created by thpffcj on 2020/1/5.
  *
  * Curator也提供ZK Recipe的分布式队列实现。利用ZK的 PERSISTENTS_EQUENTIAL节点，可以保证放入到队列中的项目是按照顺序排队的。
  * 如果单一的消费者从队列中取数据，那么它是先入先出的，这也是队列的特点。如果你严格要求顺序，你就的使用单一的消费者，可以使用
@@ -28,6 +29,9 @@ public class DistributedQueueDemo {
 
     private static final String PATH = "/example/queue";
 
+    /**
+     * 定义了两个分布式队列和两个消费者，因为PATH是相同的，会存在消费者抢占消费消息的情况
+     */
     public static void main(String[] args) throws Exception {
         TestingServer server = new TestingServer();
 
@@ -51,8 +55,22 @@ public class DistributedQueueDemo {
         queueB = builderB.buildQueue();
         queueB.start();
 
-    }
+        for (int i = 0; i < 100; i++) {
+            queueA.put("test-A-" + i);
+            Thread.sleep(100);
+            queueB.put("test-B-" + i);
+        }
+        // 等待消息消费完成
+        Thread.sleep(1000 * 10);
 
+        queueB.close();
+        queueA.close();
+        clientB.close();
+        clientA.close();
+        System.out.println("OK!");
+
+        CloseableUtils.closeQuietly(server);
+    }
 
     /**
      * 队列消息序列化实现类
