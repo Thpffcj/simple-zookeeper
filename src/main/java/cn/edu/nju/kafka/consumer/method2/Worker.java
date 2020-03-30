@@ -1,4 +1,4 @@
-package cn.edu.nju.kafka.consumer;
+package cn.edu.nju.kafka.consumer.method2;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

@@ -1,5 +1,7 @@
 package cn.edu.nju.kafka.producer;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * Created by thpffcj on 2020/2/22.
  */
@@ -13,20 +15,6 @@ public class StockQuotationInfo {
     private float currentPrice;
     private float highPrice;
     private float lowPrice;
-
-    @Override
-    public String toString() {
-        return "StockQuotationInfo{" +
-                "stockCode='" + stockCode + '\'' +
-                ", stockName='" + stockName + '\'' +
-                ", tradeTime=" + tradeTime +
-                ", preClosePrice=" + preClosePrice +
-                ", openPrice=" + openPrice +
-                ", currentPrice=" + currentPrice +
-                ", highPrice=" + highPrice +
-                ", lowPrice=" + lowPrice +
-                '}';
-    }
 
     public String getStockCode() {
         return stockCode;
@@ -90,5 +78,10 @@ public class StockQuotationInfo {
 
     public void setLowPrice(float lowPrice) {
         this.lowPrice = lowPrice;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

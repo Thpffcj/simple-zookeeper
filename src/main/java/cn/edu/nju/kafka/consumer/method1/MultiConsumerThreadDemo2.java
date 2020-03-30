@@ -1,4 +1,4 @@
-package cn.edu.nju.kafka.consumer;
+package cn.edu.nju.kafka.consumer.method1;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  *
  * 将处理消息模块改成多线程的实现方式
  */
-public class MultiConsumerThread {
+public class MultiConsumerThreadDemo2 {
 
     public static final String BROKER_LIST = "localhost:9092";
     public static final String topic = "topic-demo";

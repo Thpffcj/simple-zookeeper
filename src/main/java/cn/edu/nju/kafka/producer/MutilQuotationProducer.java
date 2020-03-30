@@ -1,5 +1,6 @@
 package cn.edu.nju.kafka.producer;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 
@@ -12,7 +13,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by thpffcj on 2020/2/22.
  *
- * 1.创建 一个ProducerRecord对象，里面包含要发送的主题，要发送的内容，还可以指定分区键或分区
+ * 1.创建一个ProducerRecord对象，里面包含要发送的主题，要发送的内容，还可以指定分区键或分区
  * 2.通过序列化器将键值和值对象序列化成字节数组使其能在网络上传输
  * 3.序列化后将数据传给分区器，若前面已经指定了分区就不做任何事直接将数据写入对应分区，若没有则根据键来选择一个分区写入。紧接着这条
  * 记录会被添加到一个批次中，这个批次的记录都会发往同一个主题和分区上。会有一个单独的进程将这些批次发送到broker上
@@ -51,12 +52,14 @@ public class MutilQuotationProducer {
     }
 
     public static void main(String[] agrs) {
-        ExecutorService executorService = Executors.newFixedThreadPool(6);
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
         ProducerRecord<String, String> record;
         try {
             for (int i = 0; i < 100; i++) {
                 StockQuotationInfo stockQuotationInfo = createQuotationInfo();
-                record = new ProducerRecord<String, String>(TOPIC, null,
+                record = new ProducerRecord<String, String>(
+                        TOPIC,
+                        null,
                         stockQuotationInfo.getTradeTime(),
                         // key - value
                         stockQuotationInfo.getStockCode(), stockQuotationInfo.toString());
@@ -67,7 +70,6 @@ public class MutilQuotationProducer {
         } finally {
             kafkaProducer.close();
             executorService.shutdown();
-            System.out.println("close");
         }
     }
 
@@ -113,4 +115,10 @@ public class MutilQuotationProducer {
         stockQuotationInfo.setStockName("股票_" + stockCode);
         return stockQuotationInfo;
     }
+
+//    public static void main(String[] args) {
+//        MutilQuotationProducer m = new MutilQuotationProducer();
+//        System.out.println(createQuotationInfo());
+//        System.out.println(JSON.parseObject(createQuotationInfo().toString(), StockQuotationInfo.class));
+//    }
 }
